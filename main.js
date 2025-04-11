@@ -27,7 +27,7 @@ const surveyCompleteEventHandler = (event) => {
   if (event.data === "Survey Completed") {
     setTimeout(() => {
       document.getElementsByClassName("mfp-close")[0].click();
-    }, 3000);
+    }, 5000);
   }
 };
 
