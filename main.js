@@ -1,4 +1,4 @@
-const SURVEY_ID = "a04VF000002dXPZYA2";
+const SURVEY_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
 const SURVEY_TIMEOUT_DAYS = 90;
 const SURVEY_COUNTDOWN_SECONDS = 10;
 
@@ -26,7 +26,7 @@ const surveyCompleteEventHandler = (event) => {
   console.log(event.data);
   if (event.data === "Survey Completed") {
     setTimeout(() => {
-      document.getElementsByClassName("mfp-close")[0].click();
+      document.getElementsByClassName("mfp-close")[0]?.click();
     }, 5000);
   }
 };
@@ -84,7 +84,7 @@ const injectSurveyIframe = () => {
   a.href = "#salesforce-survey-popup";
 
   //Get Survey container
-  let surveyContainer = document.getElementById("medalliatkbsurvey");
+  const surveyContainer = document.getElementById("medalliatkbsurvey");
   if (surveyContainer) {
     surveyContainer.appendChild(a);
     surveyContainer.appendChild(div);
@@ -109,7 +109,7 @@ const countdown = (seconds, delay = 1000) => {
 };
 
 const initSurveyScript = () => {
-  let surveyContainer = document.getElementById("medalliatkbsurvey");
+  const surveyContainer = document.getElementById("medalliatkbsurvey");
   if (!surveyContainer) {
     console.log("Survey not allowed on this page.");
     return;
