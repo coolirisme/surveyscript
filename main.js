@@ -112,7 +112,8 @@ const countdown = (seconds, delay = 1000) => {
 const initSurveyScript = () => {
   let surveyContainer = document.getElementById("medalliatkbsurvey");
   if (!surveyContainer) {
-    console.log("Survey container not found on this page.");
+    console.log("Survey not allowed on this page.");
+    return;
   }
   if (localStorage.getItem("lastSurveyed")) {
     const diff = getNumberOfDays(
