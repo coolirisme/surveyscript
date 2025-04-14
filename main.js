@@ -86,7 +86,6 @@ const injectSurveyIframe = () => {
   //Get Survey container
   let surveyContainer = document.getElementById("medalliatkbsurvey");
   if (!surveyContainer) {
-    console.log("Survey container not found on this page.");
     surveyContainer.appendChild(a);
     surveyContainer.appendChild(div);
     if (!scriptsInjected) {
