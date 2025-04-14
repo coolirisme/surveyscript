@@ -72,7 +72,7 @@ const injectSurveyIframe = () => {
   div.id = "salesforce-survey-popup";
   div.classList.add("mfp-hide");
   div.style =
-    "z-index:9999999;max-width:500px;margin:20px auto;padding:40px 0px 0px 0px;border-radius:0;background:#fff;text-align center;position:relative;overflow:hidden;height:70vh";
+    "max-width:500px;margin:20px auto;padding:40px 0px 0px 0px;border-radius:0;background:#fff;text-align center;position:relative;overflow:hidden;height:70vh";
   const iframe = document.createElement("iframe");
   iframe.id = "survey-iframe";
   iframe.style = "width:100%;height:100%";
@@ -85,7 +85,7 @@ const injectSurveyIframe = () => {
 
   //Get Survey container
   let surveyContainer = document.getElementById("medalliatkbsurvey");
-  if (!surveyContainer) {
+  if (surveyContainer) {
     surveyContainer.appendChild(a);
     surveyContainer.appendChild(div);
     if (!scriptsInjected) {
