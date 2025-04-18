@@ -31,6 +31,17 @@ const surveyCompleteEventHandler = (event) => {
   }
 };
 
+changeSurveyVisibility = (visibility = null) => {
+  const surveyContainer = document.getElementById("medalliatkbsurvey");
+  if (surveyContainer) {
+    const elementsArray = Array.from(
+      document.querySelectorAll('[class*="mfp-"]')
+    );
+    elementsArray.forEach((x) => (x.style.display = visibility));
+    document.body.style = null;
+  }
+};
+
 const injectScriptAndUse = () => {
   const head = document.getElementsByTagName("head")[0];
   const script = document.createElement("script");
@@ -57,6 +68,7 @@ const injectScriptAndUse = () => {
           });
           const clickElement = document.getElementById("survey-click-element");
           clickElement.click();
+          changeSurveyVisibility("none");
         });
       };
       head.appendChild(link);
@@ -103,7 +115,7 @@ const countdown = (seconds, delay = 1000) => {
       console.log(seconds);
     } else {
       console.log(seconds);
-      injectSurveyIframe();
+      changeSurveyVisibility(null);
     }
   }, delay);
 };
@@ -121,6 +133,7 @@ const initSurveyScript = () => {
     );
     if (diff > SURVEY_TIMEOUT_DAYS) {
       localStorage.setItem("lastSurveyed", new Date().toISOString());
+      injectSurveyIframe();
       countdown(SURVEY_COUNTDOWN_SECONDS);
     } else {
       console.log(
@@ -131,6 +144,7 @@ const initSurveyScript = () => {
     }
   } else {
     localStorage.setItem("lastSurveyed", new Date().toISOString());
+    injectSurveyIframe();
     countdown(SURVEY_COUNTDOWN_SECONDS);
   }
 };
