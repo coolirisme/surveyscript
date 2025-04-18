@@ -38,7 +38,19 @@ changeSurveyVisibility = (visibility = null) => {
       document.querySelectorAll('[class*="mfp-"]')
     );
     elementsArray.forEach((x) => (x.style.display = visibility));
-    document.body.style = null;
+    document
+      .querySelectorAll('[class*="mfp-bg"]')
+      .forEach((x) => (x.style["z-index"] = 1000));
+    document
+      .querySelectorAll('[class*="mfp-wrap"]')
+      .forEach((x) => (x.style["z-index"] = 1001));
+
+    if (!visibility) {
+      document.body.style["padding-right"] = "15px";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style = null;
+    }
   }
 };
 
@@ -149,4 +161,9 @@ const initSurveyScript = () => {
   }
 };
 
+/*
+const div = document.createElement("div");
+div.id = "medalliatkbsurvey";
+document.body.appendChild(div);
+*/
 initSurveyScript();
