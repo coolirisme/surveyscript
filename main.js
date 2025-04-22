@@ -1,6 +1,6 @@
 const SURVEY_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
 const SURVEY_TIMEOUT_DAYS = 90;
-const SURVEY_COUNTDOWN_SECONDS = 10;
+const SURVEY_COUNTDOWN_SECONDS = 20;
 const SURVEY_MINIMUM_PERCENTAGE = 0;
 
 let scriptsInjected = false;
