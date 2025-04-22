@@ -1,4 +1,4 @@
-const SURVEY_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
+const SURVEY_INVITE_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
 const SURVEY_TIMEOUT_DAYS = 90;
 const SURVEY_COUNTDOWN_SECONDS = 20;
 const SURVEY_MINIMUM_PERCENTAGE = 0;
@@ -83,7 +83,7 @@ const injectScriptAndUse = () => {
             type: "inline",
             preloader: false,
             callbacks: {
-              beforeOpen: function () {},
+              beforeOpen: function () { },
             },
           });
           const clickElement = document.getElementById("survey-click-element");
@@ -104,11 +104,11 @@ const injectSurveyIframe = () => {
   div.id = "salesforce-survey-popup";
   div.classList.add("mfp-hide");
   div.style =
-    "max-width:500px;margin:20px auto;padding:40px 0px 0px 0px;border-radius:0;background:#fff;text-align center;position:relative;overflow:hidden;height:70vh";
+    "max-width:500px;margin:20px auto;padding:40px 0px 0px 0px;border-radius:0;background:#fff;text-align center;position:relative;overflow:hidden;height:91vh";
   const iframe = document.createElement("iframe");
   iframe.id = "survey-iframe";
   iframe.style = "width:100%;height:100%";
-  iframe.src = `https://alteryx--ayxuat.sandbox.my.site.com/surveyhome/?inviteId=${SURVEY_ID}&userId=${userId}`;
+  iframe.src = `https://alteryx--ayxuat.sandbox.my.site.com/surveyhome/?inviteId=${SURVEY_INVITE_ID}&userId=${userId}`;
   div.appendChild(iframe);
   const a = document.createElement("a");
   a.classList.add("survey-popup");
@@ -190,8 +190,7 @@ const initSurveyScript = () => {
       countdown(SURVEY_COUNTDOWN_SECONDS);
     } else {
       console.log(
-        `Days remaining till next survey is triggered => ${
-          SURVEY_TIMEOUT_DAYS - diff
+        `Days remaining till next survey is triggered => ${SURVEY_TIMEOUT_DAYS - diff
         }`
       );
     }
@@ -202,6 +201,7 @@ const initSurveyScript = () => {
   }
 };
 
+//TEMP code below, should only be uncommented during testing
 /*
 const div = document.createElement("div");
 div.id = "medalliatkbsurvey";
