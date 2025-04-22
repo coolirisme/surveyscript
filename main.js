@@ -1,7 +1,7 @@
 const SURVEY_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
 const SURVEY_TIMEOUT_DAYS = 90;
 const SURVEY_COUNTDOWN_SECONDS = 10;
-const SURVEY_MINIMUM_PERCENTAGE = 10;
+const SURVEY_MINIMUM_PERCENTAGE = 0;
 
 let scriptsInjected = false;
 
@@ -161,7 +161,7 @@ checkSurveyEligibility = () => {
     localStorage.setItem("surveyProbability", probability);
   }
 
-  const eligible = probability > SURVEY_THRESHOLD_PERCENTAGE;
+  const eligible = probability > SURVEY_MINIMUM_PERCENTAGE;
   if (!eligible && !localStorage.getItem("lastSurveyed")) {
     localStorage.setItem("lastSurveyed", new Date().toISOString());
   }
@@ -207,4 +207,5 @@ const div = document.createElement("div");
 div.id = "medalliatkbsurvey";
 document.body.appendChild(div);
 */
+
 initSurveyScript();
