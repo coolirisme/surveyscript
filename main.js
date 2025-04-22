@@ -161,7 +161,7 @@ checkSurveyEligibility = () => {
     localStorage.setItem("surveyProbability", probability);
   }
 
-  const eligible = probability > SURVEY_MINIMUM_PERCENTAGE;
+  const eligible = probability >= SURVEY_MINIMUM_PERCENTAGE;
   if (!eligible && !localStorage.getItem("lastSurveyed")) {
     localStorage.setItem("lastSurveyed", new Date().toISOString());
   }
