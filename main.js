@@ -1,8 +1,16 @@
 const SURVEY_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
 const SURVEY_TIMEOUT_DAYS = 90;
 const SURVEY_COUNTDOWN_SECONDS = 10;
+const SURVEY_MINIMUM_PERCENTAGE = 10;
 
 let scriptsInjected = false;
+
+const generateRandomNumber = () => {
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  const randomValue2 = array[0] / 2 ** 32;
+  return Math.round(randomValue2 * 100);
+};
 
 const extractUserId = () => {
   const id = document.cookie
@@ -132,12 +140,45 @@ const countdown = (seconds, delay = 1000) => {
   }, delay);
 };
 
+checkSurveyEligibility = () => {
+  if (localStorage.getItem("lastSurveyed")) {
+    const diff = getNumberOfDays(
+      localStorage.getItem("lastSurveyed"),
+      new Date().toISOString()
+    );
+    if (diff > SURVEY_TIMEOUT_DAYS) {
+      localStorage.removeItem("surveyProbability");
+    }
+  } else {
+    localStorage.removeItem("surveyProbability");
+  }
+
+  let probability = 100;
+  if (localStorage.getItem("surveyProbability")) {
+    probability = parseFloat(localStorage.getItem("surveyProbability"));
+  } else {
+    probability = generateRandomNumber();
+    localStorage.setItem("surveyProbability", probability);
+  }
+
+  const eligible = probability > SURVEY_THRESHOLD_PERCENTAGE;
+  if (!eligible && !localStorage.getItem("lastSurveyed")) {
+    localStorage.setItem("lastSurveyed", new Date().toISOString());
+  }
+  return eligible;
+};
+
 const initSurveyScript = () => {
   const surveyContainer = document.getElementById("medalliatkbsurvey");
   if (!surveyContainer) {
     console.log("Survey not allowed on this page.");
     return;
   }
+  if (!checkSurveyEligibility()) {
+    console.log("User not eligible for survey");
+    return;
+  }
+
   if (localStorage.getItem("lastSurveyed")) {
     const diff = getNumberOfDays(
       localStorage.getItem("lastSurveyed"),
