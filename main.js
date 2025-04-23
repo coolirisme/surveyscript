@@ -135,6 +135,7 @@ const countdown = (seconds, delay = 1000) => {
       console.log(seconds);
     } else {
       console.log(seconds);
+      localStorage.setItem("lastSurveyed", new Date().toISOString());
       changeSurveyVisibility(null);
     }
   }, delay);
@@ -185,7 +186,6 @@ const initSurveyScript = () => {
       new Date().toISOString()
     );
     if (diff > SURVEY_TIMEOUT_DAYS) {
-      localStorage.setItem("lastSurveyed", new Date().toISOString());
       injectSurveyIframe();
       countdown(SURVEY_COUNTDOWN_SECONDS);
     } else {
@@ -195,7 +195,6 @@ const initSurveyScript = () => {
       );
     }
   } else {
-    localStorage.setItem("lastSurveyed", new Date().toISOString());
     injectSurveyIframe();
     countdown(SURVEY_COUNTDOWN_SECONDS);
   }
