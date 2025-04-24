@@ -1,4 +1,6 @@
+const SURVEY_ORG_URL = "https://alteryx--ayxuat.sandbox.my.site.com";
 const SURVEY_INVITE_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
+const SURVEY_DIV_ID = "medalliatkbsurvey";
 const SURVEY_TIMEOUT_DAYS = 90;
 const SURVEY_COUNTDOWN_SECONDS = 20;
 const SURVEY_MINIMUM_PERCENTAGE = 0;
@@ -40,7 +42,7 @@ const surveyCompleteEventHandler = (event) => {
 };
 
 changeSurveyVisibility = (visibility = null) => {
-  const surveyContainer = document.getElementById("medalliatkbsurvey");
+  const surveyContainer = document.getElementById(SURVEY_DIV_ID);
   if (surveyContainer) {
     const elementsArray = Array.from(
       document.querySelectorAll('[class*="mfp-"]')
@@ -108,7 +110,7 @@ const injectSurveyIframe = () => {
   const iframe = document.createElement("iframe");
   iframe.id = "survey-iframe";
   iframe.style = "width:100%;height:100%";
-  iframe.src = `https://alteryx--ayxuat.sandbox.my.site.com/surveyhome/?inviteId=${SURVEY_INVITE_ID}&userId=${userId}`;
+  iframe.src = `${SURVEY_ORG_URL}/surveyhome/?inviteId=${SURVEY_INVITE_ID}&userId=${userId}`;
   div.appendChild(iframe);
   const a = document.createElement("a");
   a.classList.add("survey-popup");
@@ -116,7 +118,7 @@ const injectSurveyIframe = () => {
   a.href = "#salesforce-survey-popup";
 
   //Get Survey container
-  const surveyContainer = document.getElementById("medalliatkbsurvey");
+  const surveyContainer = document.getElementById(SURVEY_DIV_ID);
   if (surveyContainer) {
     surveyContainer.appendChild(a);
     surveyContainer.appendChild(div);
@@ -170,7 +172,7 @@ checkSurveyEligibility = () => {
 };
 
 const initSurveyScript = () => {
-  const surveyContainer = document.getElementById("medalliatkbsurvey");
+  const surveyContainer = document.getElementById(SURVEY_DIV_ID);
   if (!surveyContainer) {
     console.log("Survey not allowed on this page.");
     return;
