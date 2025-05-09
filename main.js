@@ -1,6 +1,6 @@
 const SURVEY_ORG_URL = "https://alteryx--ayxuat.sandbox.my.site.com";
 const SURVEY_INVITE_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
-const SURVEY_DIV_ID = "medalliatkbsurvey";
+const SURVEY_DIV_ID = "community_csat_survey";
 const SURVEY_TIMEOUT_DAYS = 90;
 const SURVEY_COUNTDOWN_SECONDS = 20;
 const SURVEY_MINIMUM_PERCENTAGE = 0;
@@ -202,11 +202,8 @@ const initSurveyScript = () => {
   }
 };
 
-//TEMP code below, should only be uncommented during testing
-/*
 const div = document.createElement("div");
-div.id = "medalliatkbsurvey";
+div.id = SURVEY_DIV_ID;
 document.body.appendChild(div);
-*/
 
 initSurveyScript();
