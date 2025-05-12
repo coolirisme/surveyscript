@@ -1,8 +1,8 @@
-const SURVEY_ORG_URL = "https://alteryx--ayxuat.sandbox.my.site.com";
-const SURVEY_INVITE_ID = "a04VF000002dXPZYA2"; //Salesforce Survey Invite Id
+const SURVEY_ORG_URL = "https://alteryx.my.site.com";
+const SURVEY_INVITE_ID = "a4VUu0000001VHtMAM"; //Salesforce Survey Invite Id
 const SURVEY_DIV_ID = "community_csat_survey";
 const SURVEY_TIMEOUT_DAYS = 90;
-const SURVEY_COUNTDOWN_SECONDS = 20;
+const SURVEY_COUNTDOWN_SECONDS = 180;
 const SURVEY_MINIMUM_PERCENTAGE = 0;
 
 let scriptsInjected = false;
@@ -33,7 +33,6 @@ const getNumberOfDays = (start, end) => {
 };
 
 const surveyCompleteEventHandler = (event) => {
-  console.log(event.data);
   if (event.data === "Survey Completed") {
     setTimeout(() => {
       document.getElementsByClassName("mfp-close")[0]?.click();
@@ -134,9 +133,7 @@ const countdown = (seconds, delay = 1000) => {
     seconds--;
     if (seconds !== 0) {
       countdown(seconds, delay);
-      console.log(seconds);
     } else {
-      console.log(seconds);
       localStorage.setItem("lastSurveyed", new Date().toISOString());
       changeSurveyVisibility(null);
     }
